@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 44 · Biliary Disorders</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #7f6b3f, #5e4d2e);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: #fbf3e3;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 40px rgba(90, 70, 30, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #b48b45, #886a33);
+            color: white;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+            border-bottom: 5px solid #f3da9c;
+            box-shadow: 0 8px 15px #5e461f;
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1::before {
+            content: "🧪";
+            font-size: 2.3rem;
+            filter: drop-shadow(0 0 4px #ffe5b4);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .counter {
+            background: #7c6134;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            min-width: 110px;
+            text-align: center;
+            backdrop-filter: blur(3px);
+            border: 2px solid #f5dcab;
+            color: #fef9e6;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: #ede1c9;
+            flex-shrink: 0;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #c9a459, #a88543);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 12px #dcb469;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 30px;
+            background: #f5ebd7;
+        }
+
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background: white;
+            border-radius: 32px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(150, 120, 50, 0.2);
+            border: 2px solid #f0dbb4;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .question-header {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            background: linear-gradient(145deg, #b3883f, #8f662f);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            border: 3px solid #f8dfb3;
+            box-shadow: 0 7px 0 #6e4e24;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #5f431f;
+            flex-grow: 1;
+            font-weight: 600;
+            padding-right: 15px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 20px 22px;
+            border: 3px solid #fae6c7;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.15rem;
+            box-shadow: 0 5px 12px rgba(130, 90, 40, 0.08);
+        }
+
+        .option:hover {
+            background: #fff7e8;
+            border-color: #c69d54;
+            transform: translateY(-3px);
+            box-shadow: 0 18px 25px rgba(190, 130, 50, 0.15);
+        }
+
+        .option-letter {
+            background: linear-gradient(145deg, #ae803b, #845f2c);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+            border: 2px solid #fbe3bc;
+        }
+
+        .option.correct {
+            background: linear-gradient(145deg, #c6e6d4, #b2dec6);
+            border-color: #2b7a56;
+            color: #1b4f32;
+        }
+        .option.correct .option-letter {
+            background: #1f7a51;
+            border-color: #b7f0d4;
+        }
+
+        .option.incorrect {
+            background: linear-gradient(145deg, #fad7d2, #fecbc3);
+            border-color: #b14242;
+            color: #631e1e;
+        }
+        .option.incorrect .option-letter {
+            background: #b84545;
+            border-color: #f5b7b7;
+        }
+
+        .feedback-area {
+            flex-shrink: 0;
+        }
+
+        .feedback {
+            padding: 25px;
+            border-radius: 20px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            animation: slideIn 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .feedback.correct {
+            background: linear-gradient(145deg, #daf0da, #c8e6c8);
+            border: 3px solid #2e7d5a;
+            color: #1b4d2b;
+            display: flex;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(145deg, #ffdedb, #fecbc7);
+            border: 3px solid #bb3b3b;
+            color: #632020;
+            display: flex;
+        }
+
+        .feedback-icon {
+            font-size: 2rem;
+        }
+
+        .rationale {
+            background: linear-gradient(145deg, #fef5e4, #fdeed9);
+            border: 3px solid #b3863f;
+            border-radius: 20px;
+            padding: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        .rationale.show {
+            display: block;
+        }
+        .rationale h4 {
+            color: #996f30;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        .rationale p {
+            color: #6b4c22;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 35px;
+            background: #edddc2;
+            border-top: 3px solid #dfc8a4;
+            flex-shrink: 0;
+            height: 85px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 16px 42px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 6px 0 #735a2e;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #b38744, #8c6832);
+            color: white;
+            border: 2px solid #f6dcb0;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #58421f, 0 8px 20px #b68b48;
+        }
+        .btn-secondary {
+            background: linear-gradient(145deg, #9f7f49, #7a5f36);
+            color: white;
+            border: 2px solid #f2dbb6;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #4b3a21, 0 8px 20px #9f814b;
+        }
+        .btn-cancel {
+            background: linear-gradient(145deg, #c27f7f, #aa4a4a);
+            color: white;
+            display: none;
+            border: 2px solid #f3baba;
+        }
+        .btn-cancel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 0 #632d2d;
+        }
+        .btn-cancel.show {
+            display: flex;
+        }
+
+        .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 4px 0 #5e4b2b;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 700px) {
+            .question-text { font-size: 1.2rem; }
+            .option { font-size: 1rem; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <h1>Chapter 44: Biliary Disorders</h1>
+            <div class="subtitle">39 questions · cholecystitis · pancreatitis · gallstones · ERCP</div>
+        </div>
+        <div class="counter" id="counter">1/39</div>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="question-area">
+            <div class="question-header">
+                <div class="question-number" id="questionNumber">1</div>
+                <div class="question-text" id="question"></div>
+            </div>
+            
+            <div class="options-container" id="options"></div>
+        </div>
+        
+        <div class="feedback-area">
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>🧪 BILIARY RATIONALE:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">⬅️ PREV</button>
+        <div class="nav-buttons">
+            <button class="btn btn-cancel" id="cancelBtn" onclick="cancelSelection()">✖️ CANCEL</button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">NEXT ➡️</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ----- Chapter 44 exact questions (39 items) -----
+    const questions = [
+        { //1
+            id: 1,
+            question: "A nurse is assessing a client who has been diagnosed with cholecystitis, and is experiencing localized abdominal pain. When assessing the characteristics of the client's pain, the nurse should anticipate that it may radiate to what region?",
+            options: [
+                "A. Left upper chest",
+                "B. Inguinal region",
+                "C. Neck or jaw",
+                "D. Right shoulder"
+            ],
+            correct: 3, // D
+            rationale: "Biliary colic pain radiates to right shoulder or back. (PTS:1 REF:p.1418)"
+        },
+        { //2
+            id: 2,
+            question: "A client has been newly diagnosed with acute pancreatitis and admitted to the acute medical unit. How should the nurse explain the pathophysiology of this client's health problem?",
+            options: [
+                "A. 'Toxins have accumulated and inflamed your pancreas.'",
+                "B. 'Bacteria likely migrated from your intestines and became lodged in your pancreas.'",
+                "C. 'A virus that was likely already present in your body has begun to attack your pancreatic cells.'",
+                "D. 'The enzymes that your pancreas produces have damaged the pancreas itself.'"
+            ],
+            correct: 3, // D
+            rationale: "Pancreatitis = autodigestion of pancreas by its own enzymes. (PTS:1 REF:p.1430)"
+        },
+        { //3
+            id: 3,
+            question: "A client's abdominal ultrasound indicates cholelithiasis. When the nurse is reviewing the client's laboratory studies, what finding is most closely associated with this diagnosis?",
+            options: [
+                "A. Increased bilirubin",
+                "B. Decreased serum cholesterol",
+                "C. Increased blood urea nitrogen (BUN)",
+                "D. Decreased serum alkaline phosphatase level"
+            ],
+            correct: 0, // A
+            rationale: "Bile flow obstruction → increased bilirubin. (PTS:1 REF:p.1419)"
+        },
+        { //4
+            id: 4,
+            question: "A nurse who provides care in a community clinic assesses a wide range of individuals. The nurse should identify which client as having the highest risk for chronic pancreatitis?",
+            options: [
+                "A. A 45-year-old obese woman with a high-fat diet",
+                "B. An 18-year-old man who is a weekend binge drinker",
+                "C. A 39-year-old man with chronic alcoholism",
+                "D. A 51-year-old woman who smokes one-and-a-half packs of cigarettes per day"
+            ],
+            correct: 2, // C
+            rationale: "Chronic alcoholism accounts for most chronic pancreatitis in Western societies. (PTS:1 REF:p.1433)"
+        },
+        { //5
+            id: 5,
+            question: "A 37-year-old client presents at the emergency department (ED) reporting nausea and vomiting and severe abdominal pain. The client's abdomen is rigid, and there is bruising to the client's flank. The client's spouse states that the client was on a drinking binge for the past 2 days. The ED nurse should assist in assessing the client for what health problem?",
+            options: [
+                "A. Severe pancreatitis with possible peritonitis",
+                "B. Acute cholecystitis",
+                "C. Chronic pancreatitis",
+                "D. Acute appendicitis with possible perforation"
+            ],
+            correct: 0, // A
+            rationale: "Severe pain after binge, rigid abdomen, bruising → severe pancreatitis/peritonitis. (PTS:1 REF:p.1430)"
+        },
+        { //6
+            id: 6,
+            question: "A client has been scheduled for an ultrasound of the gallbladder the following morning. What should the nurse do in preparation for this diagnostic study?",
+            options: [
+                "A. Have the client refrain from food and fluids after midnight.",
+                "B. Administer the contrast agent orally 10 to 12 hours before the study.",
+                "C. Administer the radioactive agent intravenously the evening before the study.",
+                "D. Encourage the intake of 64 ounces of water 8 hours before the study."
+            ],
+            correct: 0, // A
+            rationale: "Fasting ensures gallbladder distended for ultrasound. (PTS:1 REF:p.1421)"
+        },
+        { //7
+            id: 7,
+            question: "A client who had surgery for gallbladder disease has just returned to the postsurgical unit from postanesthetic recovery. The nurse caring for this client knows to immediately report what assessment finding to the health care provider?",
+            options: [
+                "A. Decreased breath sounds",
+                "B. Drainage of bile-colored fluid onto the abdominal dressing",
+                "C. Rigidity of the abdomen",
+                "D. Acute pain with movement"
+            ],
+            correct: 2, // C
+            rationale: "Rigid abdomen → possible bleeding from vessel puncture; report immediately. (PTS:1 REF:p.1427)"
+        },
+        { //8
+            id: 8,
+            question: "A client with chronic pancreatitis had a pancreaticojejunostomy created 3 months ago for relief of pain and to restore drainage of pancreatic secretions. The client has come to the office for a routine postsurgical appointment. The client is frustrated that the pain has not decreased. What is the most appropriate initial response by the nurse?",
+            options: [
+                "A. 'The majority of clients who have a pancreaticojejunostomy have their normal digestion restored but do not achieve pain relief.'",
+                "B. 'Pain relief occurs by 6 months in most clients who undergo this procedure, but some people experience a recurrence of their pain.'",
+                "C. 'Your health care provider will likely want to discuss the removal of your gallbladder to achieve pain relief.'",
+                "D. 'You are probably not appropriately taking the medications for your pancreatitis and pain, so we will need to discuss your medication regimen in detail.'"
+            ],
+            correct: 1, // B
+            rationale: "Pain relief often occurs by 6 months in >85%; may recur as disease progresses. (PTS:1 REF:p.1437)"
+        },
+        { //9
+            id: 9,
+            question: "A nurse is caring for a client who has been scheduled for endoscopic retrograde cholangiopancreatography (ERCP) the following day. When providing anticipatory guidance for this client, the nurse should describe what aspect of this diagnostic procedure?",
+            options: [
+                "A. The need to protect the incision postprocedure",
+                "B. The use of moderate sedation",
+                "C. The need to infuse 50% dextrose during the procedure",
+                "D. The use of general anesthesia"
+            ],
+            correct: 1, // B
+            rationale: "ERCP uses moderate sedation, not general anesthesia. (PTS:1 REF:p.1422)"
+        },
+        { //10
+            id: 10,
+            question: "A client has undergone a laparoscopic cholecystectomy and is being prepared for discharge home. When providing health education, the nurse should prioritize what topic?",
+            options: [
+                "A. Management of fluid balance in the home setting",
+                "B. The need for blood glucose monitoring for the next week",
+                "C. Signs and symptoms of intra-abdominal complications",
+                "D. Appropriate use of prescribed pancreatic enzymes"
+            ],
+            correct: 2, // C
+            rationale: "Early discharge → teach signs of complications (bleeding, infection, bile leak). (PTS:1 REF:p.1425)"
+        },
+        { //11
+            id: 11,
+            question: "A nurse is preparing a plan of care for a client with pancreatic cysts that have necessitated drainage through the abdominal wall. What nursing diagnosis should the nurse prioritize?",
+            options: [
+                "A. Disturbed body image",
+                "B. Impaired skin integrity",
+                "C. Nausea",
+                "D. Risk for deficient fluid volume"
+            ],
+            correct: 1, // B
+            rationale: "Pancreatic drainage destructive to skin; priority impaired skin integrity. (PTS:1 REF:p.1438)"
+        },
+        { //12
+            id: 12,
+            question: "A home health nurse is caring for a client discharged home after pancreatic surgery. The nurse documents the nursing diagnosis Risk for Imbalanced Nutrition: Less than Body Requirements on the care plan based on the potential complications that may occur after surgery. What are the most likely complications for the client who has had pancreatic surgery?",
+            options: [
+                "A. Proteinuria and hyperkalemia",
+                "B. Hemorrhage and hypercalcemia",
+                "C. Weight loss and hypoglycemia",
+                "D. Malabsorption and hyperglycemia"
+            ],
+            correct: 3, // D
+            rationale: "Pancreatic surgery complications: malabsorption (enzyme loss) and hyperglycemia. (PTS:1 REF:p.1442)"
+        },
+        { //13
+            id: 13,
+            question: "A client has had a laparoscopic cholecystectomy. The client is now reporting right shoulder pain. What should the nurse suggest to relieve the pain?",
+            options: [
+                "A. Aspirin every 4 to 6 hours as prescribed",
+                "B. Application of heat 15 to 20 minutes each hour",
+                "C. Application of an ice pack for no more than 15 minutes",
+                "D. Application of liniment rub to affected area"
+            ],
+            correct: 1, // B
+            rationale: "Referred shoulder pain from CO2; heat, walking, sitting up help. (PTS:1 REF:p.1425)"
+        },
+        { //14
+            id: 14,
+            question: "A client returns to the floor after a laparoscopic cholecystectomy. The nurse should assess the client for signs and symptoms of what serious potential complication of this surgery?",
+            options: [
+                "A. Diabetic coma",
+                "B. Decubitus ulcer",
+                "C. Wound evisceration",
+                "D. Bile duct injury"
+            ],
+            correct: 3, // D
+            rationale: "Most serious complication after lap chole = bile duct injury. (PTS:1 REF:p.1425)"
+        },
+        { //15
+            id: 15,
+            question: "A client has been treated in the hospital for an episode of acute pancreatitis. The client has acknowledged the role that his alcohol use played in the development of his health problem, but has not expressed specific plans for lifestyle changes. What is the nurse's most appropriate response?",
+            options: [
+                "A. Educate the client about the link between alcohol use and pancreatitis.",
+                "B. Ensure that the client knows the importance of attending follow-up appointments.",
+                "C. Refer the client to social work or spiritual care.",
+                "D. Encourage the client to connect with a community-based support group."
+            ],
+            correct: 3, // D
+            rationale: "Refer to support groups (AA) for alcohol cessation; client already knows link. (PTS:1 REF:p.1433)"
+        },
+        { //16
+            id: 16,
+            question: "A client is being treated for acute pain from an episode of pancreatitis. The nurse has identified a nursing diagnosis of Ineffective Breathing Pattern related to pain secondary to effects of surgery. Which intervention should the nurse perform in order to best address this diagnosis?",
+            options: [
+                "A. Position the client supine to facilitate diaphragm movement.",
+                "B. Administer corticosteroids by nebulizer as prescribed.",
+                "C. Perform oral suctioning as needed to remove secretions.",
+                "D. Administer analgesic per orders."
+            ],
+            correct: 3, // D
+            rationale: "Treat pain first to improve breathing pattern. (PTS:1 REF:p.1432)"
+        },
+        { //17
+            id: 17,
+            question: "A client with gallstones has been prescribed ursodeoxycholic acid (UDCA). The nurse understands that additional teaching is needed regarding this medication when the client states:",
+            options: [
+                "A. 'It is important that I see my health care provider for scheduled follow-up appointments while taking this medication.'",
+                "B. 'I will take this medication for 2 weeks and then gradually stop taking it.'",
+                "C. 'If I lose weight, the dose of the medication may need to be changed.'",
+                "D. 'This medication will help dissolve small gallstones made of cholesterol.'"
+            ],
+            correct: 1, // B
+            rationale: "UDCA requires 6–12 months therapy; not short-term. (PTS:1 REF:p.1422)"
+        },
+        { //18
+            id: 18,
+            question: "A nurse is assisting with serving dinner trays on the unit. Upon receiving the dinner tray for a client admitted with acute gallbladder inflammation, the nurse will question which of the following foods on the tray?",
+            options: [
+                "A. Fried chicken",
+                "B. Mashed potatoes",
+                "C. Dinner roll",
+                "D. Tapioca pudding"
+            ],
+            correct: 0, // A
+            rationale: "Avoid fried/fatty foods (precipitate cholecystitis). (PTS:1 REF:p.1422)"
+        },
+        { //19
+            id: 19,
+            question: "A nurse is assessing an older adult client with gallstones. The nurse is aware that the client may not exhibit typical symptoms, and that particular symptoms that may be exhibited in the elderly client may include what examples?",
+            options: [
+                "A. Fever and pain",
+                "B. Chills and jaundice",
+                "C. Nausea and vomiting",
+                "D. Signs and symptoms of septic shock"
+            ],
+            correct: 3, // D
+            rationale: "Elderly may present with septic shock signs (oliguria, hypotension, confusion). (PTS:1 REF:p.1426)"
+        },
+        { //20
+            id: 20,
+            question: "A nurse is creating a care plan for a client with acute pancreatitis. The care plan includes reduced activity. What rationale for this intervention should be cited in the care plan?",
+            options: [
+                "A. Bed rest reduces the client's metabolism and reduces the risk of metabolic acidosis.",
+                "B. Reduced activity protects the physical integrity of pancreatic cells.",
+                "C. Bed rest lowers the metabolic rate and reduces enzyme production.",
+                "D. Inactivity reduces caloric need and gastrointestinal motility."
+            ],
+            correct: 2, // C
+            rationale: "Bed rest decreases metabolic rate and secretion of pancreatic enzymes. (PTS:1 REF:p.1433)"
+        },
+        { //21
+            id: 21,
+            question: "The nurse is caring for a client who has just returned from the ERCP removal of gallstones. The nurse should monitor the client for signs of what complications?",
+            options: [
+                "A. Pain and peritonitis",
+                "B. Bleeding and perforation",
+                "C. Acidosis and hypoglycemia",
+                "D. Gangrene of the gallbladder and hyperglycemia"
+            ],
+            correct: 1, // B
+            rationale: "Post-ERCP: monitor for bleeding, perforation, pancreatitis, sepsis. (PTS:1 REF:p.1422)"
+        },
+        { //22
+            id: 22,
+            question: "A client with pancreatic cancer has been scheduled for a pancreaticoduodenectomy (Whipple procedure). During health education, the client should be informed that this procedure will involve the removal of which of the following? Select all that apply.",
+            options: [
+                "A. Gallbladder",
+                "B. Part of the stomach",
+                "C. Duodenum",
+                "D. Part of the common bile duct",
+                "E. Part of the rectum"
+            ],
+            correct: [0,1,2,3], // A, B, C, D
+            rationale: "Whipple removes gallbladder, part of stomach, duodenum, proximal jejunum, head of pancreas, distal common bile duct. Rectum not removed. (PTS:1 REF:p.1441)"
+        },
+        { //23
+            id: 23,
+            question: "An adult client has been admitted to the medical unit for the treatment of acute pancreatitis. What nursing action should be included in this client's plan of care?",
+            options: [
+                "A. Measure the client's abdominal girth daily.",
+                "B. Limit the use of opioid analgesics.",
+                "C. Monitor the client for signs of dysphagia.",
+                "D. Encourage activity as tolerated."
+            ],
+            correct: 0, // A
+            rationale: "Monitor abdominal girth due to ascites risk. (PTS:1 REF:p.1433)"
+        },
+        { //24
+            id: 24,
+            question: "A community health nurse is caring for a client whose multiple health problems include chronic pancreatitis. During the most recent home visit, the nurse learns that the client is experiencing severe abdominal pain and has vomited 3 times in the past several hours. What is the nurse's most appropriate action?",
+            options: [
+                "A. Administer a PRN dose of pancreatic enzymes as prescribed.",
+                "B. Teach the client about the importance of abstaining from alcohol.",
+                "C. Arrange for the client to be transported to the hospital.",
+                "D. Insert an NG tube, if available, and stay with the client."
+            ],
+            correct: 2, // C
+            rationale: "Acute severe symptoms warrant hospital treatment. (PTS:1 REF:p.1433)"
+        },
+        { //25
+            id: 25,
+            question: "A student nurse is caring for a client who has a diagnosis of acute pancreatitis and who is receiving parenteral nutrition. The student should prioritize which of the following assessments?",
+            options: [
+                "A. Fluid output",
+                "B. Oral intake",
+                "C. Blood glucose levels",
+                "D. BUN and creatinine levels"
+            ],
+            correct: 2, // C
+            rationale: "Monitor serum glucose q4-6h due to risk of hyperglycemia. (PTS:1 REF:p.1431)"
+        },
+        { //26
+            id: 26,
+            question: "A client has a recent diagnosis of chronic pancreatitis and is undergoing diagnostic testing to determine pancreatic islet cell function. The nurse should anticipate what diagnostic test?",
+            options: [
+                "A. Glucose tolerance test",
+                "B. ERCP",
+                "C. Pancreatic biopsy",
+                "D. Abdominal ultrasonography"
+            ],
+            correct: 0, // A
+            rationale: "Glucose tolerance test evaluates islet cell function. (PTS:1 REF:p.1437)"
+        },
+        { //27
+            id: 27,
+            question: "A client has been admitted to the hospital for the treatment of chronic pancreatitis. The client has been stabilized and the nurse is now planning health promotion and educational interventions. Which of the following should the nurse prioritize?",
+            options: [
+                "A. Educating the client about expectations and care following surgery",
+                "B. Educating the client about the management of blood glucose after discharge",
+                "C. Educating the client about postdischarge lifestyle modifications",
+                "D. Educating the client about the potential benefits of pancreatic transplantation"
+            ],
+            correct: 2, // C
+            rationale: "Lifestyle modifications (especially alcohol cessation) key. (PTS:1 REF:p.1433)"
+        },
+        { //28
+            id: 28,
+            question: "A client is receiving care in the intensive care unit for acute pancreatitis. The nurse is aware that pancreatic necrosis is a major cause of morbidity and mortality in clients with acute pancreatitis. Consequently, the nurse should assess for what signs or symptoms of this complication?",
+            options: [
+                "A. Sudden increase in random blood glucose readings",
+                "B. Increased abdominal girth accompanied by decreased level of consciousness",
+                "C. Fever, increased heart rate and decreased blood pressure",
+                "D. Abdominal pain unresponsive to analgesics"
+            ],
+            correct: 2, // C
+            rationale: "Pancreatic necrosis → shock (hypotension, tachycardia, fever). (PTS:1 REF:p.1433)"
+        },
+        { //29
+            id: 29,
+            question: "A client has been diagnosed with acute pancreatitis. The nurse is addressing the diagnosis of Acute Pain Related to Pancreatitis. What pharmacologic intervention is most likely to be ordered for this client?",
+            options: [
+                "A. Oral oxycodone",
+                "B. IV hydromorphone",
+                "C. IM meperidine",
+                "D. Oral naproxen"
+            ],
+            correct: 1, // B
+            rationale: "Severe pain requires parenteral opioids (morphine, fentanyl, hydromorphone). (PTS:1 REF:p.1431)"
+        },
+        { //30
+            id: 30,
+            question: "A client has just been diagnosed with chronic pancreatitis. The client is underweight and in severe pain and diagnostic testing indicates that over 80% of the client's pancreas has been destroyed. The client asks the nurse why the diagnosis was not made earlier in the disease process. What would be the nurse's best response?",
+            options: [
+                "A. 'The symptoms of pancreatitis mimic those of much less serious illnesses.'",
+                "B. 'Your body doesn't require pancreatic function until it is under great stress, so it is easy to go unnoticed.'",
+                "C. 'Chronic pancreatitis often goes undetected until a large majority of pancreatic function is lost.'",
+                "D. 'It's likely that your other organs were compensating for your decreased pancreatic function.'"
+            ],
+            correct: 2, // C
+            rationale: "Symptoms occur after ~90% exocrine function lost. (PTS:1 REF:p.1429)"
+        },
+        { //31
+            id: 31,
+            question: "A client has been diagnosed with pancreatic cancer and has been admitted for care. Following initial treatment, the nurse should be aware that the client is most likely to require which of the following situations?",
+            options: [
+                "A. Inpatient rehabilitation",
+                "B. Rehabilitation in the home setting",
+                "C. Intensive physical therapy",
+                "D. Hospice care"
+            ],
+            correct: 3, // D
+            rationale: "Pancreatic cancer low survival rate; often requires hospice. (PTS:1 REF:p.1440)"
+        },
+        { //32
+            id: 32,
+            question: "A client is admitted to the ICU with acute pancreatitis. The client's family asks what causes acute pancreatitis. The critical care nurse knows that a majority of clients with acute pancreatitis have what health issue?",
+            options: [
+                "A. Type 1 diabetes",
+                "B. An impaired immune system",
+                "C. Undiagnosed chronic pancreatitis",
+                "D. An amylase deficiency"
+            ],
+            correct: 2, // C
+            rationale: "80% have biliary tract disease or alcoholism, often undiagnosed chronic pancreatitis. (PTS:1 REF:p.1429)"
+        },
+        { //33
+            id: 33,
+            question: "A client is admitted to the unit with acute cholecystitis. The health care provider has stated that surgery will be scheduled in 4 days. The client asks why the surgery is being put off for a week when he has a 'sick gallbladder.' What rationale would underlie the nurse's response?",
+            options: [
+                "A. Surgery is delayed until the client can eat a regular diet without vomiting.",
+                "B. Surgery is delayed until the acute symptoms subside.",
+                "C. The client requires aggressive nutritional support prior to surgery.",
+                "D. Time is needed to determine whether a laparoscopic procedure can be used."
+            ],
+            correct: 1, // B
+            rationale: "Surgery delayed until acute symptoms subside (usually a few days). (PTS:1 REF:p.1422)"
+        },
+        { //34
+            id: 34,
+            question: "A client with a cholelithiasis has been scheduled for a laparoscopic cholecystectomy. Why is laparoscopic cholecystectomy preferred by surgeons over an open procedure?",
+            options: [
+                "A. Laparoscopic cholecystectomy poses fewer surgical risks than an open procedure.",
+                "B. Laparoscopic cholecystectomy can be performed in a clinic setting, while an open procedure requires an OR.",
+                "C. A laparoscopic approach allows for the removal of the entire gallbladder.",
+                "D. A laparoscopic approach can be performed under conscious sedation."
+            ],
+            correct: 0, // A
+            rationale: "Lap chole has fewer risks, shorter hospital stay, faster recovery. (PTS:1 REF:p.1422)"
+        },
+        { //35
+            id: 35,
+            question: "A client with ongoing back pain, nausea, and abdominal bloating has been diagnosed with cholecystitis secondary to gallstones. The nurse should anticipate that the client will undergo what intervention?",
+            options: [
+                "A. Laparoscopic cholecystectomy",
+                "B. Methyl tertiary butyl ether (MTBE) infusion",
+                "C. Intracorporeal lithotripsy",
+                "D. Extracorporeal shock wave therapy (ESWL)"
+            ],
+            correct: 0, // A
+            rationale: "Cholecystectomy is preferred; nonsurgical approaches temporary/infrequent. (PTS:1 REF:p.1422)"
+        },
+        { //36
+            id: 36,
+            question: "A nurse is caring for a client with gallstones who has been prescribed ursodeoxycholic acid (UDCA). The client asks how this medicine is going to help his symptoms. The nurse should be aware of what aspect of this drug's pharmacodynamics?",
+            options: [
+                "A. It inhibits the synthesis of bile.",
+                "B. It inhibits the synthesis and secretion of cholesterol.",
+                "C. It inhibits the secretion of bile.",
+                "D. It inhibits the synthesis and secretion of amylase."
+            ],
+            correct: 1, // B
+            rationale: "UDCA inhibits synthesis/secretion of cholesterol, desaturating bile. (PTS:1 REF:p.1422)"
+        },
+        { //37
+            id: 37,
+            question: "A nurse is providing discharge education to a client who has undergone a laparoscopic cholecystectomy. During the immediate recovery period, the nurse should recommend what foods?",
+            options: [
+                "A. High-fiber foods",
+                "B. Low-purine, nutrient-dense foods",
+                "C. Low-fat foods high in proteins and carbohydrates",
+                "D. Foods that are low-residue and low in fat"
+            ],
+            correct: 2, // C
+            rationale: "Encourage low-fat, high-protein, high-carbohydrate diet post-op. (PTS:1 REF:p.1427)"
+        },
+        { //38
+            id: 38,
+            question: "A client presents to the emergency department (ED) reporting severe right upper quadrant pain. The client states that the family doctor said the pain was caused by gallstones. The ED nurse should recognize what possible complication of gallstones?",
+            options: [
+                "A. Acute pancreatitis",
+                "B. Atrophy of the gallbladder",
+                "C. Gallbladder cancer",
+                "D. Gangrene of the gallbladder"
+            ],
+            correct: 3, // D
+            rationale: "Obstructed bile outflow → ischemia → gangrene/perforation. (PTS:1 REF:p.1430)"
+        },
+        { //39
+            id: 39,
+            question: "A client's assessment and diagnostic testing are suggestive of acute pancreatitis. When the nurse is performing the health interview, what assessment question(s) addresses likely etiologic factors? Select all that apply.",
+            options: [
+                "A. 'How many alcoholic drinks do you typically consume in a week?'",
+                "B. 'Have you ever been tested for diabetes?'",
+                "C. 'Have you ever been diagnosed with gallstones?'",
+                "D. 'Would you say that you eat a particularly high-fat diet?'",
+                "E. 'Does anyone in your family have cystic fibrosis?'"
+            ],
+            correct: [0,1,2,3], // A,B,C,D
+            rationale: "Etiologic factors: alcohol, gallstones, diabetes, high-fat diet. CF not associated. (PTS:1 REF:p.1429)"
+        }
+    ];
+
+    // ----- identical navigation/selection logic as template -----
+    let currentQuestion = 0;
+    let selectedOption = null;
+    let answers = Array(questions.length).fill(null);
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        if (!q) return;
+
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+        document.getElementById('counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionNumber').textContent = q.id;
+
+        document.getElementById('question').innerHTML = q.question;
+        loadOptions(q);
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        const stored = answers[currentQuestion];
+        document.getElementById('nextBtn').disabled = stored === null || stored === undefined;
+        document.getElementById('nextBtn').textContent = currentQuestion >= questions.length - 1 ? 'FINISH ➡️' : 'NEXT ➡️';
+    }
+
+    function loadOptions(q) {
+        const container = document.getElementById('options');
+        container.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + idx)}</div><div>${opt}</div>`;
+            div.onclick = () => selectOption(idx);
+            container.appendChild(div);
+        });
+
+        const saved = answers[currentQuestion];
+        if (saved !== null && saved !== undefined) {
+            selectOption(saved, true);
+        }
+    }
+
+    function selectOption(index, fromMemory = false) {
+        const q = questions[currentQuestion];
+        if (!fromMemory && selectedOption !== null) return;
+
+        if (!fromMemory) {
+            selectedOption = index;
+            answers[currentQuestion] = index;
+        }
+
+        highlightSelected(index, q);
+        showFeedback(index, q);
+        document.getElementById('nextBtn').disabled = false;
+        document.getElementById('cancelBtn').classList.add('show');
+    }
+
+    function highlightSelected(index, q) {
+        const opts = document.querySelectorAll('.option');
+        opts.forEach((opt, i) => opt.classList.remove('correct', 'incorrect'));
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        if (Array.isArray(q.correct)) {
+            correctIndices.forEach(ci => opts[ci]?.classList.add('correct'));
+            if (!correctIndices.includes(index)) {
+                opts[index]?.classList.add('incorrect');
+            }
+        } else {
+            if (index === q.correct) {
+                opts[index].classList.add('correct');
+            } else {
+                opts[index].classList.add('incorrect');
+                opts[q.correct].classList.add('correct');
+            }
+        }
+    }
+
+    function showFeedback(index, q) {
+        const fb = document.getElementById('feedback');
+        const icon = document.getElementById('feedbackIcon');
+        const text = document.getElementById('feedbackText');
+        const rationaleDiv = document.getElementById('rationale');
+        const rationaleP = document.getElementById('rationaleText');
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        const isCorrect = correctIndices.includes(index);
+
+        if (isCorrect) {
+            fb.className = 'feedback correct';
+            icon.textContent = '✅';
+            text.textContent = 'CORRECT!';
+        } else {
+            fb.className = 'feedback incorrect';
+            icon.textContent = '❌';
+            const letters = correctIndices.map(c => String.fromCharCode(65 + c)).join(', ');
+            text.textContent = `INCORRECT. Correct answer(s): ${letters}`;
+        }
+
+        fb.style.display = 'flex';
+        rationaleP.innerHTML = q.rationale;
+        rationaleDiv.classList.add('show');
+    }
+
+    function cancelSelection() {
+        const q = questions[currentQuestion];
+        selectedOption = null;
+        answers[currentQuestion] = null;
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+        document.getElementById('nextBtn').disabled = true;
+    }
+
+    function nextCard() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            selectedOption = null;
+            loadQuestion();
+        } else {
+            currentQuestion = 0;
+            loadQuestion();
+        }
+    }
+
+    function previousCard() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            const q = questions[currentQuestion];
+            selectedOption = answers[currentQuestion];
+            loadQuestion();
+        }
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '4') selectOption(parseInt(e.key)-1);
+        else if (e.key >= 'a' && e.key <= 'd') selectOption(e.key.charCodeAt(0)-97);
+        else if (e.key >= 'A' && e.key <= 'D') selectOption(e.key.charCodeAt(0)-65);
+        else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) previousCard();
+        else if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) nextCard();
+        else if (e.key === 'Escape' && document.getElementById('cancelBtn').classList.contains('show')) cancelSelection();
+    });
+
+    loadQuestion();
+</script>
+</body>
+</html>
